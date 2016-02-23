@@ -37,6 +37,9 @@ Feature: A feature to demonstrate CukeSaladJuggler util by testing FB graph api 
 
 ```
 
+### Do I have to do any EL evaluation in my steps?
+No. In the above example where el expressions are used, the test step will get the actual values (already evaluated) in the DataTable/String params.
+
 ##Latest release:
 Release 1.0.0
 
