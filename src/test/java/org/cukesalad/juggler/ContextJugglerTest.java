@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.cukesalad.context.ContextHook;
 import org.cukesalad.context.CukeSaladContext;
+import org.cukesalad.context.TestUtil;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,6 +22,8 @@ import cucumber.api.java.en.Given;
 
 public class ContextJugglerTest {
 
+  TestUtil testutil;
+  
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {}
 
@@ -29,6 +32,7 @@ public class ContextJugglerTest {
 
   @Before
   public void setUp() throws Exception {
+    testutil = new TestUtil();
     ContextHook hook = new ContextHook();
     hook.beforeHook();
   }
@@ -44,7 +48,7 @@ public class ContextJugglerTest {
   public void testJuggle() {
     CukeSaladContext.addToContext("status", String.class, "working");
     //CukeSaladContext.getCurrentContext().setVariable("status", new ExpressionFactoryImpl().createValueExpression("working", String.class));
-    test("aspect is ${status}");
+    testutil.test("aspect is ${status}");
   }
   
   @Test
@@ -81,27 +85,7 @@ public class ContextJugglerTest {
     raw.add(Arrays.asList("${characters[3].name}","${characters[3].house}","${characters[3].place}"));
     DataTable actual = DataTable.create(raw );
 
-    testDataTable(actual);
+    testutil.testDataTable(actual);
   }
   
-  @Given("asdasd")
-  public void test(String something) {
-    
-    assertEquals("aspect is working", something);
-  }
-  
-  @Given("asdasd")
-  public void testDataTable(DataTable actual) {
-    
-    List<List<String>> raw = new ArrayList<List<String>>();
-    raw.add(Arrays.asList("name","house","place"));
-    raw.add(Arrays.asList("Ned","Stark","winterfell"));
-    raw.add(Arrays.asList("Tyrion","Lanister","casterly rock"));
-    raw.add(Arrays.asList("Drogo","Dothraki", "vas dothrak"));
-    raw.add(Arrays.asList("Robert","Baratheon", "storms end"));
-    DataTable expected = DataTable.create(raw );
-    assertEquals(expected, actual);
-  }
-  
-
 }

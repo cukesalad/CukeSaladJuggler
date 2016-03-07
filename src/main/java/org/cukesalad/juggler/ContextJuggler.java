@@ -8,12 +8,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.cukesalad.context.CukeSaladContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cucumber.api.DataTable;
 
 @Aspect
 public class ContextJuggler {
 
+  private static Logger LOGGER = LoggerFactory.getLogger(ContextJuggler.class);
   @Pointcut("execution(@cucumber.api.java.*.* * *.*(..))")
   public void cukestep() {};
 

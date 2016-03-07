@@ -40,6 +40,34 @@ Feature: A feature to demonstrate CukeSaladJuggler util by testing FB graph api 
 ### Do I have to do any EL evaluation in my steps?
 No. In the above example where el expressions are used, the test step will get the actual values (already evaluated) in the DataTable/String params.
 
+### I still want to know how this work?
+From the inside it works using AspectJ and EL evaluation. The Juggler has an around aspect that advices any method annotated with ```cucumber.api.java.*```. For the aspect to work, you will need to weave the aspect in your code either at compile time or loadtime.
+
+### I am not familiar with aspectj. Can I still use it?
+Yes. You do not need any familiarity with aspectj but for the weaving of aspects into your test case. If you dont know weaving, there is a gradle plugin that will do it at compile time - [gradle-aspectj](https://github.com/eveoh/gradle-aspectj). For instance, add the below lines to your build.gradle
+```gradle
+buildscript {
+    repositories {
+        maven {
+            url "https://maven.eveoh.nl/content/repositories/releases"
+        }
+    }
+
+    dependencies {
+        classpath "nl.eveoh:gradle-aspectj:1.6"
+    }
+}
+project.ext {
+    aspectjVersion = '1.8.4'
+}
+
+apply plugin: 'aspectj'
+dependencies {
+    aspectpath "org.cukesalad:CukeDBSalad:1.0.0" // any jar dependency you may have that has cucumber steps annotations. 
+    // your other dependancies
+}
+```
+
 ##Latest release:
 Release 1.0.0
 

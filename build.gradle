@@ -1,17 +1,30 @@
 buildscript {
     repositories {
-        jcenter()
+      jcenter()
+      maven {
+        url "https://maven.eveoh.nl/content/repositories/releases"
+      }
     }
     dependencies {
+      classpath "nl.eveoh:gradle-aspectj:1.6"
         //classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
     }
+}
+project.ext {
+  aspectjVersion = '1.8.8'
 }
 //apply plugin: 'com.jfrog.bintray'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'signing'
-
+apply plugin: 'aspectj'
+compileAspect {
+  xlint = 'debug'
+}
+compileTestAspect{
+  xlint = 'debug'
+}
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 group = 'org.cukesalad'
