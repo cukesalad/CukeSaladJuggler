@@ -63,7 +63,9 @@ project.ext {
 
 apply plugin: 'aspectj'
 dependencies {
+    aspectpath "org.cukesalad:CukeSaladJuggler:1.0.0" 
     aspectpath "org.cukesalad:CukeDBSalad:1.0.0" // any jar dependency you may have that has cucumber steps annotations. 
+    compile "org.cukesalad:CukeSaladJuggler:1.0.0" 
     // your other dependancies
 }
 ```
