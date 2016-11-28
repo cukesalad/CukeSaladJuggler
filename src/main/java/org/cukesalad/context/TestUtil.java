@@ -16,7 +16,7 @@ public class TestUtil {
     assertEquals("aspect is working", something);
   }
   
-  @Given("asdasd")
+  @Given("asdasd datatable")
   public void testDataTable(DataTable actual) {
     
     List<List<String>> raw = new ArrayList<List<String>>();
